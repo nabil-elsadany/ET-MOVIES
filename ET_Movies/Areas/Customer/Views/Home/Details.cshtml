@@ -1,0 +1,61 @@
+﻿@model Movies
+
+<div class="container py-4">
+    <!-- Availability Badge -->
+
+    <span class="MovieStatus-@Model.MovieStatus.ToString().ToLower() mb-3 d-block">
+        @(Model.MovieStatus)
+    </span>
+
+    <span class="badge bg-success px-3 py-2 mb-3">Available</span>
+
+
+    <!-- Movie Details Card -->
+    <div class="card shadow-lg p-4 border-0 rounded-3">
+        <div class="row g-4 align-items-center">
+
+            <!-- Movie Poster -->
+            <div class="col-lg-4 text-center">
+                <img class="img-fluid rounded shadow-sm" src="~/images/movies/@Model.ImgUrl" alt="@Model.Name">
+            </div>
+
+            <!-- Movie Info -->
+            <div class="col-lg-8">
+                <h2 class="fw-bold text-dark">@Model.Name</h2>
+                <p class="text-muted">@Model.Description</p>
+
+                <ul class="list-unstyled">
+                    <li><strong>Price:</strong> <span class="badge bg-dark">@Model.Price</span></li>
+                    <li><strong>Cinema:</strong> @Model.Cinema.Name</li>
+                    <li><strong>Start Date:</strong> @Model.StartDate.ToString("MM/dd/yyyy hh:mm tt")</li>
+                    <li><strong>End Date:</strong> @Model.EndDate.ToString("MM/dd/yyyy hh:mm tt")</li>
+                    <li><strong>Category:</strong> @Model.Category.Name</li>
+                </ul>
+
+                <!-- People Section -->
+                <div class="d-flex align-items-center mt-3">
+                    <strong class="me-2">Actors:</strong>
+
+                    @foreach (var actorMovie in Model.ActorMovies)
+                    {
+                        <a href="/Customer/Home/Actor?ActorId=@actorMovie.Actor.Id">
+                            <img src="~/images/cast/@actorMovie.Actor.ProfilePicture" class="rounded-circle border shadow-sm me-2"
+                                 width="40" height="40" alt="@actorMovie.Actor.FirstName">
+                        </a>
+                    }
+                </div>
+            </div>
+            <!-- Trailer Section - جعله بسطر جديد -->
+            <div class="col-12 mt-4">
+                <h5 class="fw-bold">Trailer</h5>
+                <div class="ratio ratio-16x9 rounded shadow-sm">
+                    <video controls>
+                        <source src="~/videos/@Model.TrailerUrl" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Categories>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Categories";
+}
+<style>
+    body {
+        background-color: black;
+        color: #FFC107;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 20px 0;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #FFC107;
+        display: inline-block;
+    }
+
+    .table-container {
+        width: 95%; /* تقليل عرض الجدول */
+        max-width: 1200px; /* تحديد حد أقصى للعرض */
+        margin: 20px auto;
+        padding: 0 2.5px; /* جعل المسافة بين اليمين واليسار 2.5px */
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #121212;
+        text-align: left;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    th {
+        background-color: #FFC107;
+        padding: 10px; /* تقليل ارتفاع الهيدر */
+        font-size: 18px;
+        text-transform: uppercase;
+        text-align: left;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    td {
+        padding: 8px; /* تقليل ارتفاع الخلايا */
+        font-size: 16px;
+        color: #FFC107;
+    }
+
+        td a {
+            color: red;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            td a:hover {
+                color: #ff6666;
+            }
+
+    tr {
+        border-bottom: 1px solid #1E1E1E;
+    }
+
+        tr:last-child {
+            border-bottom: none;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+
+</style>
+
+<div class="bg-black text-yellow-500 min-h-screen flex flex-col items-center justify-center">
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl font-bold text-center mb-8 border-b-2 border-yellow-500 pb-3 uppercase">
+            Category
+        </h1>
+        <div class="bg-gray-900 shadow-lg rounded-lg overflow-hidden w-2/3 mx-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-yellow-500 text-black text-lg">
+                        <th class="py-4 px-6 text-left">Name</th>
+                        <th class="py-4 px-6 text-center">Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="border-b border-gray-700 hover:bg-gray-800 transition duration-200">
+                            <td class="py-4 px-6 text-yellow-500 font-medium text-left">@item.Name</td>
+                            <td class="py-4 px-6 text-center">
+                                <a href="/Customer/Category/Movies?CategoryId=@item.Id"
+                                   class="text-red-500 font-semibold hover:text-red-400 transition duration-200">
+                                    All Movies
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

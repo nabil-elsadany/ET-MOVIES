@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ActorMovies>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h1>All Products</h1>
+            <a class="btn btn-success" href="/Admin/ActorMovie/Create">Create New</a>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="bg-dark text-white">
+                            <th scope="col">ActorId</th>
+                            <td scope="col">Actor</td>
+                            <th scope="col">MovieId</th>
+
+                            <td scope="col">Movie</td>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach(var item in Model)
+                      {
+                            <tr>
+                                <th scope="row">@item.ActorsId</th>
+                                <th scope="row">@item.Actor.FirstName @item.Actor.LastName </th>
+                                <td scope="row">@item.MoviesId</td>
+                                <td scope="row">@item.Movie.Name</td>
+                                
+                               
+                                <td>
+                                    <a class="btn btn-warning btn-sm" href="#">Edit</a>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@* onclick="confirmDelete(@item.Id) *@

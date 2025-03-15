@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Movies>
+
+<div class="container py-4" style="background-color: #000; min-height: 100vh;">
+    <div class="row justify-content-center">
+
+        @foreach (var item in Model)
+        {
+
+            <div class="col-lg-6 col-md-12 mb-4">
+                <div class="card h-100 shadow-lg rounded d-flex flex-row align-items-center p-3 border-0"
+                     style="max-width: 600px; background-color: #222; color: #ffa500;">
+
+                    <!-- صورة الفيلم -->
+                    <img class="img-fluid rounded" src="~/images/movies/@item.ImgUrl" alt="Movie Poster"
+                         style="width: 40%; height: auto; object-fit: cover; border: 3px solid #ffa500;">
+
+                    <!-- تفاصيل الفيلم -->
+                    <div class="card-body ps-3">
+                        <!-- العنوان -->
+                        <h6 class="fw-bold text-warning">@item.Name</h6>
+
+                        <!-- السعر -->
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="fw-bold">Price:</span>
+                            <span class="badge bg-dark ms-2">@item.Price</span>
+                        </div>
+
+                        <!-- معلومات السينما -->
+                        <p class="mb-1 text-light"><strong>Cinema:</strong> @item.Cinema.Name</p>
+                        <p class="mb-1 text-light"><strong>Start:</strong> @item.StartDate</p>
+                        <p class="mb-1 text-light"><strong>End:</strong> @item.EndDate</p>
+
+                        <!-- التصنيف -->
+                        <p class="mb-2 text-light">
+                            <strong>Category:</strong>
+                            <a href="/customer/Home/Category?ItemId=#" class="text-decoration-none text-warning">@item.Category.Name</a>
+                        </p>
+
+                        <!-- التوفر -->
+
+
+                        <span class="MovieStatus-@item.MovieStatus.ToString().ToLower() mb-3 d-block">
+
+                            <span class="MovieStatus-@item.MovieStatus.ToString().ToLower()">
+
+                                @(item.MovieStatus)
+
+                            </span>
+                            <!-- الأزرار -->
+                            <div class="d-flex gap-2">
+                                <a href="/customer/Home/Details?MovieId=@item.Id" class="btn btn-outline-warning btn-sm">More Details</a>
+                                <a href="#" class="btn btn-warning btn-sm text-dark fw-bold">Book Ticket</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
