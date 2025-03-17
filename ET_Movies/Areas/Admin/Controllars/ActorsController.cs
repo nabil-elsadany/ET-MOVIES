@@ -19,6 +19,7 @@ namespace ET_Movies.Areas.Admin.Controllars
         }
         [HttpGet]
         public IActionResult Create()
+
         {
             return View();
         }
