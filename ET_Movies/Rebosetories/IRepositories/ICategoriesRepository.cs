@@ -3,7 +3,7 @@
 
 namespace movie_ticket.Repositories.IRepositories
 {
-    public interface ICategoreisRepository : IRepository<Categories>
+    public interface ICategoriesRepository : IRepository<Categories>
     {
     }
 }

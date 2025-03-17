@@ -5,6 +5,13 @@ namespace ET_Movies.Data
 {
     public class ApplicationDbcontext : DbContext
     {
+
+        public DbSet<Movies> Movies { get; set; }
+        public DbSet<Cinemas> Cinemas { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<Actors> Actors { get; set; }
+        public DbSet<OrderItems> OrderItems { get; set; }
+        public DbSet<ActorMovies> ActorMovies { get; set; }
         public ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options) : base(options)
         {
 
@@ -13,12 +20,8 @@ namespace ET_Movies.Data
         public ApplicationDbcontext()
         {
         }
-        public DbSet<Movies> Movies { get; set; }
-        public DbSet<Cinemas> Cinemas { get; set; }
-        public DbSet<Categories> Categories { get; set; }
-        public DbSet<Actors> Actors { get; set; }
-        public DbSet<OrderItems> OrderItems { get; set; }
-        public DbSet<ActorMovies> ActorMovies { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -35,15 +38,15 @@ namespace ET_Movies.Data
 
             modelBuilder.Entity<ActorMovies>()
                 .HasOne(e => e.Actor)
-                .WithMany(e => e.ActorMovies)  
+                .WithMany(e => e.ActorMovies)
                 .HasForeignKey(e => e.ActorsId);
 
             modelBuilder.Entity<ActorMovies>()
                 .HasOne(e => e.Movie)
-                .WithMany(e => e.ActorMovies)  
+                .WithMany(e => e.ActorMovies)
                 .HasForeignKey(e => e.MoviesId);
 
-           
+
             modelBuilder.Entity<Movies>()
                 .Property(m => m.MovieStatus)
                 .HasConversion<int>();

@@ -17,7 +17,7 @@ namespace ET_Movies
 
             builder.Services.AddScoped<IActorMoviesRepository, ActorMoviesRepository>();
             builder.Services.AddScoped<IActorsRepository, ActorsRepository>();
-            builder.Services.AddScoped<ICategoreisRepository, CategoreisRepository>();
+            builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             builder.Services.AddScoped<ICinemasRepository, CinemasRepository>();
             builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
             builder.Services.AddScoped<IOrderItemsRepository, OrderItemsRepository>();

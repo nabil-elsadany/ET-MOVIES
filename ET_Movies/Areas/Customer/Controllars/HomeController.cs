@@ -12,9 +12,9 @@ public class HomeController : Controller
 {
 
     public ApplicationDbcontext Dbcontext = new ApplicationDbcontext();
-    private IMoviesRepository MoviesRepository;
-    private IActorsRepository ActorsRepository;
-    private IActorMoviesRepository ActorMoviesRepository;
+    private readonly IMoviesRepository MoviesRepository;
+    private readonly IActorsRepository ActorsRepository;
+    private readonly IActorMoviesRepository ActorMoviesRepository;
 
     public HomeController(IMoviesRepository MoviesRepository, IActorsRepository actorsRepository, IActorMoviesRepository ActorMoviesRepository)
     {
@@ -26,23 +26,23 @@ public class HomeController : Controller
     
     public IActionResult Index()
     {
-      // var item= MoviesRepository.Get(includes:[e => e.Cinema, e => e.Category]);
-       var item= Dbcontext.Movies.Include(e => e.Cinema).Include(e => e.Category);
+       var item= MoviesRepository.Get(includes:[e => e.Cinema, e => e.Category]);
+      // var item= Dbcontext.Movies.Include(e => e.Cinema).Include(e => e.Category);
        
-        return View(item.ToList());
+        return View(item);
     }
      public IActionResult Details(int MovieId)
     {
-      // var item = MoviesRepository.GetOne(filter: e =>e.Id== MovieId,includes: [e => e.Cinema, e => e.Category,e=>e.ActorMovies.Select(e=>e.Actor)]);
+       //var item = MoviesRepository.GetOne(filter: e =>e.Id== MovieId,includes: [e => e.Cinema, e => e.Category,e=>e.ActorMovies.Select(e=>e.Actor)]);
       var item= Dbcontext.Movies.Include(e => e.Cinema).Include(e => e.Category).Include(e=>e.ActorMovies).ThenInclude(e=>e.Actor).FirstOrDefault(e=>e.Id== MovieId);
         return View(item);
     }
     public IActionResult Actor(int ActorId)
     {
-       var item= ActorsRepository.GetOne( filter:e=>e.Id== ActorId,includes:[e=>e.ActorMovies.Select(e=>e.Movie)]);
-       //var item= Dbcontext.Actors.Include(e=>e.ActorMovies).ThenInclude(e=>e.Movie).FirstOrDefault(e=>e.Id== ActorId);
+        //var item= ActorsRepository.GetOne( filter:e=>e.Id== ActorId,includes:[e=>e.ActorMovies.Select(e=>e.Movie)]);
+      var item= Dbcontext.Actors.Include(e=>e.ActorMovies).ThenInclude(e=>e.Movie).FirstOrDefault(e=>e.Id== ActorId);
         var releted = ActorMoviesRepository.Get( includes: [e => e.Actor,e => e.Movie],filter: e => e.Actor.Id == ActorId).ToList();
-        //var releted = Dbcontext.ActorMovies.Include(e => e.Actor).Include(e => e.Movie).Where(e => e.Actor.Id == ActorId );
+       // var releted = Dbcontext.ActorMovies.Include(e => e.Actor).Include(e => e.Movie).Where(e => e.Actor.Id == ActorId );
         ViewBag.releted = releted;
         return View(item);
     }

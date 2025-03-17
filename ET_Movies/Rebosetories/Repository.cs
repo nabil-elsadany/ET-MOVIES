@@ -8,14 +8,16 @@ namespace movie_ticket.Repositories
 
     public class Repository<T> : IRepository<T> where T : class
     {
-        //ApplicationDbcontext dbContext = new ApplicationDbcontext();
-        private readonly ApplicationDbcontext dbContext;
+       // ApplicationDbcontext dbContext = new ApplicationDbcontext();
 
+        private readonly ApplicationDbcontext dbContext;
+        public DbSet<T> dbSet;
         public Repository(ApplicationDbcontext applicationDb)
         {
             this.dbContext = applicationDb;
+            dbSet = dbContext.Set<T>();
         }
-        public DbSet<T> dbSet;
+
 
 
 

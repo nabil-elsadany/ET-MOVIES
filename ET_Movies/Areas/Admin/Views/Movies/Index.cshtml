@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center">
             <h1>All Products</h1>
-            <a class="btn btn-success" href="#">Create New</a>
+            <a class="btn btn-success" href="/Admin/Movies/Create">Create New</a>
         </div>
     </div>
 
@@ -22,14 +22,15 @@
                             <th scope="col">StartDate</th>
                             <th scope="col">EndDate</th>
                             <th scope="col">MovieStatus</th>
-                            <th scope="col">CinemaId</th>
-                            <th scope="col">CategoryId</th>
+                            <th scope="col">CinemaName</th>
+                            <th scope="col">CategoryName</th>
 
 
                         </tr>
                     </thead>
                     <tbody>
-                       @*  @foreach (var item in Model)
+                       
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <th scope="row">@item.Id</th>
@@ -41,16 +42,18 @@
                                 <td>@item.StartDate</td>
                                 <td>@item.EndDate</td>
                                 <td>@item.MovieStatus</td>
-                                <td>@item.CinemaId</td>
-                                <td>@item.CategoryId</td>
+                                <td>@item.Cinema.Name</td>
+                                <td>@item.Category.Name</td>
 
 
                                 <td>
-                                    <a class="btn btn-warning btn-sm" href="#">Edit</a>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                    <a class="btn btn-warning btn-sm" href="/Admin/Movies/Edit?Id=@item.Id">Edit</a>
+                                    <form asp-action="Delete" asp-route-Id="@item.Id" method="post">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
-                        } *@
+                        }
                     </tbody>
                 </table>
             </div>

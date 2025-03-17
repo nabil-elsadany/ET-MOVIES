@@ -12,5 +12,6 @@ namespace ET_Movies.Models
         public string News { get; set; }
         [ValidateNever]
         public List<ActorMovies> ActorMovies { get; set; } = new List<ActorMovies>();
+
     }
 }

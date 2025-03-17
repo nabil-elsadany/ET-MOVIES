@@ -35,8 +35,10 @@
                                 <td>@item.News</td>
 
                                 <td>
-                                    <a class="btn btn-warning btn-sm" href="/User/Actor/Edit?Id=@item.Id">Edit</a>
-                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete(@item.Id)">Delete</button>
+                                    <a class="btn btn-warning btn-sm" href="/Admin/Actors/Edit?Id=@item.Id">Edit</a>
+                                    <form asp-action="Delete" asp-route-Id="@item.Id" method="post">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         } 
@@ -46,4 +48,4 @@
         </div>
     </div>
 </div>
-@* onclick="confirmDelete(@item.Id) *@
+

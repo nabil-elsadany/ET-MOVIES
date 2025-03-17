@@ -18,7 +18,7 @@ namespace ET_Movies.Models
 
         public Cinemas Cinema { get; set; }
         public Categories Category { get; set; }
-        [ValidateNever]
+        
         public List<ActorMovies> ActorMovies { get; set; } = new List<ActorMovies>();
         [ValidateNever]
         public List<OrderItems> OrderItems { get; set; } = new List<OrderItems>();
